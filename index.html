@@ -4,8 +4,85 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projet HYBRID MASTER 51</title>
-  <!-- Use absolute paths for GitHub Pages to avoid base path issues -->
-  <link rel="stylesheet" href="/planetarium-test-final/style.css">
+n  <style>
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #f8fafc;
+  margin: 0;
+  padding: 0;
+  color: #222;
+}
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #fff;
+  box-shadow: 0 2px 8px 0 #e2e8f0;
+  padding: 2rem;
+  border-radius: 18px;
+}
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c5282;
+  margin-bottom: 1rem;
+}
+button {
+  background: #2c5282;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+button:hover {
+  background: #205178;
+}
+.rest-timer {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #2c5282;
+  color: #fff;
+  padding: 1rem 2rem;
+  border-radius: 12px;
+  font-size: 1.6rem;
+  box-shadow: 0 2px 8px #2c528222;
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(44,82,130, 0.22);
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+.modal.show {
+  display: flex;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px #2c528233;
+  padding: 2rem;
+  max-width: 480px;
+}
+@media (max-width: 700px) {
+  .container {
+    padding: 0.6rem;
+    border-radius: 0;
+  }
+  .modal-content {
+    padding: 1rem;
+    max-width: 95vw;
+  }
+}
+  </style>
 </head>
 <body>
   <h1>Bienvenue dans le projet HYBRID MASTER 51</h1>
@@ -16,6 +93,48 @@
 
   <div id="restTimer" class="rest-timer" style="display:none;"></div>
 
-  <script src="/planetarium-test-final/app.js"></script>
+  <script>
+// HYBRID MASTER 51 - JS de base
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('modal');
+  const restTimer = document.getElementById('restTimer');
+  let timerInterval;
+
+  // Exemple d'ouverture de modal
+  function showModal(msg) {
+    modal.querySelector('.modal-content').innerText = msg;
+    modal.classList.add('show');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  // Exemple minuteur de repos
+  function startRestTimer(seconds) {
+    let time = seconds;
+    restTimer.style.display = 'flex';
+    restTimer.innerText = `Repos : ${time}s`;
+    clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+      time--;
+      restTimer.innerText = `Repos : ${time}s`;
+      if (time <= 0) {
+        clearInterval(timerInterval);
+        restTimer.style.display = 'none';
+      }
+    }, 1000);
+  }
+
+  // Fermer la modal au clic en dehors
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      modal.classList.remove('show');
+      modal.setAttribute('aria-hidden', 'true');
+    }
+  });
+
+  // Demo
+  window.showModal = showModal;
+  window.startRestTimer = startRestTimer;
+});
+  </script>
 </body>
 </html>
