@@ -94,20 +94,18 @@ button:hover {
   <div id="restTimer" class="rest-timer" style="display:none;"></div>
 
   <script>
-// HYBRID MASTER 51 - JS de base
+/* HYBRID MASTER 51 - JS de base */
 document.addEventListener('DOMContentLoaded', function() {
   const modal = document.getElementById('modal');
   const restTimer = document.getElementById('restTimer');
   let timerInterval;
 
-  // Exemple d'ouverture de modal
   function showModal(msg) {
     modal.querySelector('.modal-content').innerText = msg;
     modal.classList.add('show');
     modal.setAttribute('aria-hidden', 'false');
   }
 
-  // Exemple minuteur de repos
   function startRestTimer(seconds) {
     let time = seconds;
     restTimer.style.display = 'flex';
@@ -123,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 1000);
   }
 
-  // Fermer la modal au clic en dehors
   modal.addEventListener('click', function(e) {
     if (e.target === modal) {
       modal.classList.remove('show');
@@ -131,7 +128,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Demo
   window.showModal = showModal;
   window.startRestTimer = startRestTimer;
 });
